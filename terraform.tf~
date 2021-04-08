@@ -3,8 +3,6 @@ variable "region" {
 
 variable "ssh_fingerprint" {
 }
-variable "do_token" {}
-variable "pvt_key" {}
 
 provider "digitalocean" {
   token = var.do_token
@@ -44,7 +42,7 @@ resource "digitalocean_droplet" "db" {
   vpc_uuid = digitalocean_vpc.lab.id # our lab vpc set up earlier
 }
 
-# create a firewall that only accepts port 80, 443 and 22 traffic from outside.
+# create a firewall that only accepts port 80 traffic from the load balancer
 resource "digitalocean_firewall" "firewall-waf" {
   name = "firewall-waf"
 
